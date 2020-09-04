@@ -20,7 +20,6 @@ module.exports = (app) => {
         db.push({id, title, text});
         fs.writeFile(path.join(__dirname, '../db/db.json'), JSON.stringify(db), (err) => {
             if(err) throw err;
-            console.log('The file has been saved.')
         })
         res.json(db);
     });
@@ -28,7 +27,6 @@ module.exports = (app) => {
     app.delete("/api/notes/:id", (req, res) => {
         const URL = req.url.split("/");
         const selectedNote = parseInt(URL[URL.length - 1]);
-        console.log(selectedNote);
         db.forEach(({id: noteID}) => {
             if(selectedNote === noteID) {
                 const index = db.indexOf(noteID);
@@ -37,7 +35,6 @@ module.exports = (app) => {
         });
         fs.writeFile(path.join(__dirname, '../db/db.json'), JSON.stringify(db), (err) => {
             if(err) throw err;
-            console.log('The file has been saved.')
         })
         res.json(db);
     })
